@@ -1,0 +1,20 @@
+<section class="py-5">
+  <div class="container">
+    <div class="head mb-4">
+      <h1 class="text-center fw-bolder">شركات التنظيم المتاحه</h1>
+    </div>
+    <div class="companies pt-5">
+      <div *ngFor="let company of companies" class="company py-3 row justify-content-around">
+        <div class="col-md-3">
+          <img class=" " src="assets/images/grad.webp" width="300" alt="">
+        </div>
+        <div class="col-md-7">
+          <h2>{{company.name}}</h2>
+          <p> عن الشركه : {{company.desc}}</p>
+          <p>تقيم : {{company.rate}} <i class="fa-solid fa-star"></i></p>
+          <a [routerLink]="['/companyPackges',company.id]" class="btn btn-dark">اقرأ العروض</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

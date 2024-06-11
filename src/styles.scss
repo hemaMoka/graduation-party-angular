@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+.text-custom{
+  color: #E48F45 !important;
+}
+
+
+.nav-link{
+  color: white;
+  font-size: 18px;
+}

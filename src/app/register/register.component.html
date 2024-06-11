@@ -1,0 +1,38 @@
+<section class="py-5">
+  <div class="container">
+    <div class="head text-center">
+      <h1 class="fw-bolder">انشاء حساب جديد</h1>
+    </div>
+    <form class="w-50 py-3 mx-auto" (ngSubmit)="handleRegister(register)" [formGroup]="register">
+      <div class="form-group mb-4">
+        <label for="" class="h5 fw-bolder mb-3">الاسم</label>
+        <input type="text" formControlName="name" class="form-control">
+        <div *ngIf="register.get('name')?.errors&&register.get('name')?.touched">
+        <p *ngIf="register.get('name')?.getError('required')" class="alert alert-danger p-1 mb-0 mt-1">Name Is Requird</p>
+        <p *ngIf="register.get('name')?.getError('minlength')" class="alert alert-danger p-1 mb-0 mt-1">Sorry Min length
+          Character is 4</p>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label for="" class="h5 fw-bolder mb-3">الايميل</label>
+        <input type="text" formControlName="email" class="form-control">
+        <div *ngIf="register.get('email')?.errors&& register.get('email')?.touched">
+          <p *ngIf="register.get('email')?.getError('required')" class="alert alert-danger p-1 mb-0 mt-1">E_mail Is Requird</p>
+          <p *ngIf="register.get('email')?.getError('email')" class="alert alert-danger p-1 mb-0 mt-1">E_mail Not Vaild</p>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label for="" class="h5 fw-bolder mb-3">الباسورد</label>
+        <input formControlName="password" type="password" class="form-control">
+        <div *ngIf="register.get('password')?.errors&& register.get('password')?.touched">
+          <p *ngIf="register.get('password')?.getError('required')" class="alert alert-danger p-1 mb-0 mt-1">Password Is Requird
+          </p>
+        </div>
+      </div>
+      <div>
+        <button [disabled]="register.invalid" class="btn btn-dark fw-bolder ms-4">انشاء حساب</button>
+        <a routerLink="/login">لدي حساب بالفعل</a>
+      </div>
+    </form>
+  </div>
+</section>

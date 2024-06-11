@@ -1,0 +1,70 @@
+<div class="container  py-5">
+  <div class="head text-center">
+    <h2>{{company?.name}}</h2>
+    <p class="lead">{{company?.desc}}</p>
+  </div>
+
+  <div class="  pt-5 g-5">
+    <div *ngFor="let packge of company?.packeges" class="row mb-5">
+      <div class="col-md-3">
+        <img src="assets/images/packege.jpg" class="w-100" alt="">
+      </div>
+      <div class="col-md-8">
+        <h3>المكان : <span class="text-custom">{{packge?.location}}</span></h3>
+        <h4>العدد المتاح : <span>{{packge?.avaliable}}</span> فرد </h4>
+        <h5>السعر : {{packge?.price |currency:"ج.م"}}</h5>
+        <div class="row">
+          <div *ngFor="let feuture of packge?.feutures; let i = index " class="col-md-4">
+            <p>{{i+1}} - {{feuture}}</p>
+          </div>
+        </div>
+        <button (click)="ToggleOverLay()" class="btn btn-success">احجز الان</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section *ngIf="isOverLay" class="vh-100  position-fixed top-0 bottom-0 end-0 start-0 bg-white bg-opacity-50">
+  <div class="container position-relative h-100 d-flex  justify-content-center align-items-center ">
+    <i (click)="ToggleOverLay()" class="fa-solid fa-circle-xmark  end-0 fs-4 btn btn-danger p-1 position-absolute"></i>
+    <form (ngSubmit)="handleBook(book)" [formGroup]="book" class="w-50 mx-auto shadow p-3 bg-white rounded-3">
+      <h3 class="text-center mb-4 company-title">احجز الان !</h3>
+      <div class="form-group mb-4">
+        <label class="mb-2 fw-bold" for="">الاسم بالكامل</label>
+        <input [value]="userData.name" formControlName="name" type="text" class="form-control" required>
+        <div *ngIf="book.get('name')?.errors&&book.get('name')?.touched">
+          <p class="text-danger fw-bolder m-0 py-1" *ngIf="book.get('name')?.getError('required')"> هذا الحقل مطلوب </p>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label class="mb-2 fw-bold" for="">الايميل</label>
+        <input [value]="userData.email" formControlName="email" type="email" class="form-control" required>
+        <div *ngIf="book.get('email')?.errors&&book.get('email')?.touched">
+          <p class="text-danger fw-bolder m-0 py-1" *ngIf="book.get('email')?.getError('required')"> هذا الحقل مطلوب </p>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label class="mb-2 fw-bold" for="">العنوان </label>
+        <input type="text" formControlName="address" class="form-control" required>
+        <div *ngIf="book.get('address')?.errors&&book.get('address')?.touched">
+          <p class="text-danger fw-bolder m-0 py-1" *ngIf="book.get('address')?.getError('required')"> هذا الحقل مطلوب </p>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label class="mb-2 fw-bold" for="">رقم الهاتف </label>
+        <input [value]="userData.phone" formControlName="phone" type="tel" class="form-control" required>
+        <div *ngIf="book.get('phone')?.errors&&book.get('phone')?.touched">
+          <p class="text-danger fw-bolder m-0 py-1" *ngIf="book.get('phone')?.getError('required')"> هذا الحقل مطلوب </p>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label class="mb-2 fw-bold" for=""> التاريخ </label>
+        <input type="date" formControlName="date" class="form-control" required>
+        <div *ngIf="book.get('date')?.errors&&book.get('date')?.touched">
+          <p class="text-danger fw-bolder m-0 py-1" *ngIf="book.get('date')?.getError('required')"> هذا الحقل مطلوب </p>
+        </div>
+      </div>
+      <button class="btn btn-dark" [disabled]="book.invalid">حجز الاوردر</button>
+    </form>
+  </div>
+</section>
